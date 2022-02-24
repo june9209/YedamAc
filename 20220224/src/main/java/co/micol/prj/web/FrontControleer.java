@@ -37,7 +37,7 @@ public class FrontControleer extends HttpServlet {
     	map.put("/memberList.do", new MemberList()); //멤버목록 보기
     	map.put("/loginForm.do", new LoginForm()); //로그인 폼 호출
     	map.put("/memberLogin.do", new memberLogin()); //로그인처리
-    	map.put("/logOut.do", new Logout()); // 로그아웃 처리
+    	map.put("/logout.do", new Logout()); // 로그아웃 처리
     	map.put("/memberJoinForm.do",new MemberJoinForm()); // 회원가입 폼 호출
     	map.put("/memberJoin.do", new MemberJoin()); //회원가입 처리
     }

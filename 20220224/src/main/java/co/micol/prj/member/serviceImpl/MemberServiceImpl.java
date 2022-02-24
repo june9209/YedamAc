@@ -82,17 +82,38 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int memberInsert(MemberVO vo) {
 		// 멤버 추가
-		String sql = "INSERT INTO MEMBER VALEUS(?,?,?,?,?,?,?)";
-		return 0;
+		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?)";
+		int n = 0;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getId());
+			psmt.setString(2, vo.getPassword());
+			psmt.setString(3, vo.getName());
+			psmt.setString(4, vo.getAddress());
+			psmt.setString(5, vo.getTel());
+			psmt.setString(6, vo.getAuthor());
+			n = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return n;
 	}
 
 	@Override
 	public int memberUpdate(MemberVO vo) {
-		String sql = "update member set password =? , tel=?, address= ? , author=?" + " where = ? ";
+		String sql = "update member set password =? , tel=?, author=?" + " where id = ? ";
 		int n = 0;
 		try {
 			psmt = conn.prepareStatement(sql);
-			
+			psmt.setString(1, vo.getPassword());
+			psmt.setString(2, vo.getTel());
+			psmt.setString(3, vo.getAuthor());
+			psmt.setString(4, vo.getId());
+			n = psmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -119,7 +140,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean isIdcheck(String id) {
-		String sql = "select case when count(id) = 1 then 0 else 1 end as id"
+		String sql = "SELECT CASE WHEN COUNT(ID) = 1 THEN 0 ELSE 1 END AS ID"
 				+ " from member where id = ?";
 		boolean b = false;
 		try {
@@ -141,14 +162,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO memberLogin(MemberVO vo) {
-		String sql = "SELECT * FROM WHERE ID = ? AND PASSWORD = ?";
+		String sql = "SELECT * FROM MEMBER WHERE ID = ? AND PASSWORD = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1,vo.getId());
 			psmt.setString(2, vo.getPassword());
 			rs = psmt.executeQuery();
 			if(rs.next()) {
-				
 				vo.setId(rs.getString("id"));
 				vo.setPassword(rs.getString("password"));
 				vo.setName(rs.getString("name"));

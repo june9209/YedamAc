@@ -23,7 +23,7 @@ public class memberLogin implements Command {
 		
 		vo = memberDao.memberLogin(vo);
 		
-		if(vo.getId() != null) {
+		if(vo.getName() != null) {
 			//세션 처리
 			session.setAttribute("id", vo.getId()); //세션 아이디 담기
 			session.setAttribute("author", vo.getAuthor()); //세션 권한담기

@@ -17,13 +17,13 @@
 					<tr>
 						<th width = "100">아이디</th>
 						<td width = "200">
-							<input type="email" id="id" name = "id" required="required" placeholder="Enter Your Email...">
+							<input type="email" id="id" name = "id" required="required" placeholder="Enter Your Email..."><!-- id는 자바스크립트 name은 자바에서 사용  -->
 						</td>
 					</tr>
 					<tr>
 						<th width = "100">패스워드</th>
 						<td width = "200">
-						<input type="password" id="password" name = "password" required="required" placeholder = "Enter Your Password...">
+						<input type="password" id="password" name = "password" required="required" placeholder = "Enter Your Password..."><!-- id는 자바스크립트 name은 자바에서 사용  -->
 						</td>
 					</tr>
 				</table>
