@@ -27,7 +27,7 @@
 					</tr>
 					<tr>
 						<th>* password확인</th>
-						<td><input type= "password" id = "password1" name = "password" required="required"></td>
+						<td><input type= "password" id = "password1" name = "password1" required="required"></td>
 					</tr>
 					<tr>
 						<th>* 이 름</th>
@@ -53,10 +53,10 @@
 </div>
 <script type="text/javascript">
 	function formCheck(){
-		if(frm.idCheck.value=='No'){
+		/* if(frm.idCheck.value=='No'){
 			alert("아이디 중복 체크를 해주세요.")
 			return false;
-		}
+		} */
 		if(frm.password.value != frm.password1. value){
 			alert("패스워드가 일치 하지 않습니다.")
 			frm.password.value="";
