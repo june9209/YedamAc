@@ -26,9 +26,9 @@
 				<li><a href="#">Contact</a></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Product</a></li>
-				<c:if test="${empty id} }">
-					<li><a href></a></li>
-				</c:if>
+				<c:if test="${empty id }">
+            <li><a href="memberJoinForm.do">MemberJoin</a></li>
+            </c:if>
 				<li><a href="#"></a></li>
 				<li><a href="memberList.do">Members</a></li>
 			</ul>
