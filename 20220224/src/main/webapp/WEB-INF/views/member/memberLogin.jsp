@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:forward page="home.do"/>
+<jsp:include page="../home/header.jsp"/>
+<div align="center">
+	<div><h1>${message }</h1></div>
+</div>
 </body>
 </html>

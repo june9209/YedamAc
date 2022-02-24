@@ -141,8 +141,29 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO memberLogin(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM WHERE ID = ? AND PASSWORD = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1,vo.getId());
+			psmt.setString(2, vo.getPassword());
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				
+				vo.setId(rs.getString("id"));
+				vo.setPassword(rs.getString("password"));
+				vo.setName(rs.getString("name"));
+				vo.setTel(rs.getString("tel"));
+				vo.setAddress(rs.getString("address"));
+				vo.setAuthor(rs.getString("author"));
+			}
+		} catch (Exception e) {
+				e.printStackTrace();
+				
+		} finally {
+				close();
+			}
+		return vo;
+		}
 	}
 
-}
+
