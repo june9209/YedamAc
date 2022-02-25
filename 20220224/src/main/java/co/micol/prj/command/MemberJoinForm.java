@@ -10,7 +10,8 @@ public class MemberJoinForm implements Command {
 	@Override
 	public String run(HttpServletRequest request, HttpServletResponse response) {
 		//회원가입 폼 호출
-		return "member/memberJoinForm";
+		return "member/memberResisterForm";
+//		return "member/memberJoinForm";
 	}
 
 }

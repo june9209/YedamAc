@@ -28,8 +28,9 @@ public class memberLogin implements Command {
 			session.setAttribute("id", vo.getId()); //세션 아이디 담기
 			session.setAttribute("author", vo.getAuthor()); //세션 권한담기
 			session.setAttribute("name", vo.getName()); //이름담기
-			System.out.println(vo.getName());
-			request.setAttribute("message", vo.getName() + "님 환영합니다.");
+			return "home.do";
+//			System.out.println(vo.getName());
+//			request.setAttribute("message", vo.getName() + "님 환영합니다.");
 		}else {
 			request.setAttribute("message","아이디 또는 패스워드가 일치하지 않습니다.");
 		}

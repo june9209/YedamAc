@@ -12,6 +12,9 @@ public class MemberJoin implements Command {
 
 	@Override
 	public String run(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("member join command");
+		System.out.println(request.getParameter("id"));
+		System.out.println(request.getParameter("password"));
 		MemberService memberDao = new MemberServiceImpl();
 		MemberVO vo = new MemberVO();
 		vo.setId(request.getParameter("id"));
@@ -22,12 +25,11 @@ public class MemberJoin implements Command {
 		vo.setAuthor(request.getParameter("author"));
 		int n = memberDao.memberInsert(vo);
 		if (n != 0) {
-			request.setAttribute("message", vo.getName() + "님 가입을 축하드립니다.");
-			
+			return "home/home";
 		}else {
 			request.setAttribute("message", "회원가입 실패하였습니다.");
+			return "member/memberResisterForm";
 		}
-		return "member/memberLogin";
 	}
 
 }

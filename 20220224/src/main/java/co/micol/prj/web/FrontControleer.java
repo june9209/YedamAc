@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.micol.prj.command.AjaxIdCheck;
 import co.micol.prj.command.HomeCommand;
 import co.micol.prj.command.LoginForm;
 import co.micol.prj.command.Logout;
 import co.micol.prj.command.MemberJoin;
 import co.micol.prj.command.MemberJoinForm;
 import co.micol.prj.command.MemberList;
+import co.micol.prj.command.memberDelete;
 import co.micol.prj.command.memberLogin;
 import co.micol.prj.common.Command;
 
@@ -38,8 +40,10 @@ public class FrontControleer extends HttpServlet {
     	map.put("/loginForm.do", new LoginForm()); //로그인 폼 호출
     	map.put("/memberLogin.do", new memberLogin()); //로그인처리
     	map.put("/logout.do", new Logout()); // 로그아웃 처리
-    	map.put("/memberJoinForm.do",new MemberJoinForm()); // 회원가입 폼 호출
+    	map.put("/memberRegisterForm.do",new MemberJoinForm()); // 회원가입 폼 호출
     	map.put("/memberJoin.do", new MemberJoin()); //회원가입 처리
+    	map.put("/ajaxIdCheck.do", new AjaxIdCheck()); //아이디 중복췤(aJax)
+    	map.put("/memberDelete.do", new memberDelete()); //아이디 중복췤(aJax)
     }
     
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,11 +53,19 @@ public class FrontControleer extends HttpServlet {
 		String contextPath = request.getContextPath(); //ContextPath 가져옴
 		String page = uri.substring(contextPath.length()); // 실제 요청을 구함 (처리해야 할 요청)
 		
+		System.out.println(page);
+		
 		Command command = map.get(page); //Command command = new HomeCommand();
 		String viewPage = command.run(request, response);
 		
 		if(viewPage != null && !viewPage.endsWith(".do")) {
-			viewPage = "WEB-INF/views/" + viewPage + ".jsp";
+			if(viewPage.startsWith("ajax:")) { //ajax를 처리하는 view
+				response.setContentType("text/html");
+				response.getWriter().append(viewPage.substring(5));
+				return;
+			}else {
+				viewPage = "WEB-INF/views/" + viewPage + ".jsp";
+			}
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
